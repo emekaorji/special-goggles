@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useCallback, useEffect } from 'react';
-import styles from '../styles/home.module.css';
+import styles from '../styles/app.module.css';
 
 type data = {
   url: string,
@@ -44,7 +44,7 @@ const Home: NextPage<props> = ({ results }) => {
 
   useEffect(() => {
     console.log(results);
-  }, [])
+  }, [results])
   
   return (
     <>
