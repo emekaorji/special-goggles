@@ -9,9 +9,6 @@ import { Googles, Logo } from './icon';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Button from './button';
 
-// Functions
-import { useData } from '../context/dataContext';
-
 const Nav = ({ data, setData, setShouldLoadMore }) => {
 	const initialData = useRef(data).current;
 	const [inputValue, setInputValue] = useState('');
