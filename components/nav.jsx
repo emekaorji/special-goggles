@@ -23,7 +23,7 @@ const Nav = ({ data, setData }) => {
 
 		const newData = initialData.filter((story) => regex.test(story.title));
 		setData(newData);
-	}, []);
+	}, [inputValue]);
 
 	useEffect(() => {
 		setWindowWidth(window.innerWidth);
