@@ -27,6 +27,7 @@ function Home({ results }) {
 	const [data, setData] = useState(results);
 	const [isBottomOfPage, setIsBottomOfPage] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [shouldLoadMore, setShouldLoadMore] = useState(true);
 
 	const loadMoreData = useCallback(async () => {
 		if (isBottomOfPage) {
@@ -41,11 +42,12 @@ function Home({ results }) {
 
 	useEffect(() => {
 		const unsubscribe = () => {
+			if (!shouldLoadMore) return;
 			if (results.length >= 124) return;
 			window.addEventListener('scroll', () => {
 				const app = document.getElementById('app');
 				const isBottomOfPage =
-					window.innerHeight + window.scrollY >= app.scrollHeight - 100;
+					window.innerHeight + window.scrollY >= app.scrollHeight - 200;
 
 				if (isBottomOfPage) setIsBottomOfPage(true);
 			});
@@ -63,7 +65,11 @@ function Home({ results }) {
 			<Head>
 				<title>Hacker News Posts | Find the latest tech posts</title>
 			</Head>
-			<Nav data={data} setData={setData} />
+			<Nav
+				data={data}
+				setData={setData}
+				setShouldLoadMore={setShouldLoadMore}
+			/>
 			<Posts results={data} />
 			<br />
 			<br />

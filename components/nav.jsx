@@ -12,13 +12,16 @@ import Button from './button';
 // Functions
 import { useData } from '../context/dataContext';
 
-const Nav = ({ data, setData }) => {
+const Nav = ({ data, setData, setShouldLoadMore }) => {
 	const initialData = useRef(data).current;
 	const [inputValue, setInputValue] = useState('');
 	const [inputIsFocused, setInputIsFocused] = useState(true);
 	const [windowWidth, setWindowWidth] = useState(0);
 
 	const search = useCallback(() => {
+		if (inputValue) setShouldLoadMore(false);
+		else setShouldLoadMore(true);
+
 		const regex = new RegExp(`${inputValue}`, 'gi');
 
 		const newData = initialData.filter((story) => regex.test(story.title));
