@@ -44,13 +44,13 @@ function Home({ results }) {
 
 	useEffect(() => {
 		const unsubscribe = () => {
-			if (!shouldLoadMore) return;
 			if (results.length >= 124) return;
 			window.addEventListener('scroll', () => {
 				const app = document.getElementById('app');
 				const isBottomOfPage =
 					window.innerHeight + window.scrollY >= app.scrollHeight - 200;
 
+				if (!shouldLoadMore) return;
 				if (isBottomOfPage) setIsBottomOfPage(true);
 			});
 		};
@@ -60,7 +60,7 @@ function Home({ results }) {
 
 	useEffect(() => {
 		loadMoreData();
-	}, [isBottomOfPage]);
+	}, [isBottomOfPage, loadMoreData]);
 
 	return (
 		<>

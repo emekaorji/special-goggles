@@ -29,7 +29,7 @@ const Nav = ({ data, setData, setShouldLoadMore }) => {
 
 		const newData = initialData.filter((story) => regex.test(story.title));
 		setData(newData);
-	}, [inputValue]);
+	}, [inputValue, initialData, setData, setShouldLoadMore]);
 
 	useEffect(() => {
 		setWindowWidth(window.innerWidth);
@@ -37,7 +37,7 @@ const Nav = ({ data, setData, setShouldLoadMore }) => {
 
 	useEffect(() => {
 		search();
-	}, [inputValue]);
+	}, [inputValue, search]);
 
 	return (
 		<nav
