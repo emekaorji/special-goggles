@@ -1,20 +1,22 @@
-import type { postData } from '../typesAndInterfaces/homePageTypes';
+import type { PostData } from '../typesAndInterfaces/homePageTypes';
 
-const getData = async () => {
-  const dataArray: Array<object> = [];
+const getData = async (dataAmount: number, dataRange: number = 1) => {
+	const dataArray: Array<object> = [];
 
-  for (let index = 1; index <= 20; index++) {
-    // 124
-    const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${index}.json`);
+	for (let index = 0; index < dataAmount; index++) {
+		// 124
+		const response = await fetch(
+			`https://hacker-news.firebaseio.com/v0/item/${index + dataRange}.json`
+		);
 
-    const data: postData = await response.json();
+		const data: PostData = await response.json();
 
-    if (data.url) {
-      dataArray.push(data);
-    }
-  }
+		if (data.url) {
+			dataArray.push(data);
+		}
+	}
 
-  return dataArray;
+	return dataArray;
 };
 
 export { getData };

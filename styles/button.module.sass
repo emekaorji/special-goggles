@@ -1,0 +1,38 @@
+@mixin size
+  width: 5rem
+  height: 2rem
+
+.button
+  @include size
+  background-color: #fff
+  box-shadow: 2px 2px 8px #0001
+  color: #fff
+  font-weight: 500
+  position: relative
+  isolation: isolate
+  overflow: hidden
+  border-radius: .4rem
+  cursor: pointer
+  &:hover .frontFace
+    width: 0rem
+
+.behindText
+  background-color: transparent
+  color: #ff6600
+  position: absolute
+  top: 0
+  left: 0
+  overflow: hidden
+  z-index: -1
+
+.frontFace
+  @include size
+  background-color: #ff6600
+  overflow: hidden
+  
+.behindText, .frontText
+  @include size
+  white-space: nowrap
+  display: flex
+  justify-content: center
+  align-items: center

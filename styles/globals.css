@@ -20,15 +20,20 @@ a {
   text-decoration: none;
 }
 
-input {
-  background-color: #f6f6ef;
+input, button {
   font-size: inherit;
   font-weight: inherit;
   font-family: inherit;
   border: none;
   outline: none;
 }
+input {
+  background-color: #f6f6ef;
+}
 
+footer {
+  padding-block-start: 3em;
+}
 
 
 

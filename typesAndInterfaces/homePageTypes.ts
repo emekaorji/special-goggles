@@ -1,8 +1,10 @@
-export type postData = {
-  url: string,
-  title: string;
+export type PostData = {
+	url: string;
+	title: string;
+	by: string;
+	time: string;
 };
 
-export interface props {
-  results: Array<postData>;
+export interface Results {
+	results: Array<PostData>;
 }
