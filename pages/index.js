@@ -12,6 +12,7 @@ import { getData } from '../utils/dataHandler';
 import Head from 'next/head';
 import Nav from '../components/nav';
 import Loader from '../components/loader';
+import Header from '../components/header';
 
 export const getServerSideProps = async () => {
 	const results = await getData(20);
@@ -65,6 +66,7 @@ function Home({ results }) {
 			<Head>
 				<title>Hacker News Posts | Find the latest tech posts</title>
 			</Head>
+			<Header />
 			<Nav
 				data={data}
 				setData={setData}

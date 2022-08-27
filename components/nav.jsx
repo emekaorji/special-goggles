@@ -15,12 +15,15 @@ import { useData } from '../context/dataContext';
 const Nav = ({ data, setData, setShouldLoadMore }) => {
 	const initialData = useRef(data).current;
 	const [inputValue, setInputValue] = useState('');
-	const [inputIsFocused, setInputIsFocused] = useState(true);
+	const [buttonIsVisible, setButtonIsVisible] = useState(true);
 	const [windowWidth, setWindowWidth] = useState(0);
 
 	const search = useCallback(() => {
-		if (inputValue) setShouldLoadMore(false);
-		else setShouldLoadMore(true);
+		if (inputValue) {
+			setShouldLoadMore(false);
+		} else {
+			setShouldLoadMore(true);
+		}
 
 		const regex = new RegExp(`${inputValue}`, 'gi');
 
@@ -39,11 +42,11 @@ const Nav = ({ data, setData, setShouldLoadMore }) => {
 	return (
 		<nav
 			className={
-				styles.nav + (inputIsFocused ? ' ' + styles.inputFocused : '')
+				styles.nav + (buttonIsVisible ? ' ' + styles.inputFocused : '')
 			}>
 			<div className={baseStyles.container}>
 				<div className={styles.logo}>
-					<Logo width={48} height={48} />
+					<Logo width={40} height={40} />
 				</div>
 				<input
 					type='text'
@@ -51,8 +54,8 @@ const Nav = ({ data, setData, setShouldLoadMore }) => {
 					value={inputValue}
 					onChange={(e) => setInputValue(e.target.value)}
 					placeholder='Search Post'
-					onFocus={() => setInputIsFocused(true)}
-					onBlur={() => setInputIsFocused(false)}
+					onFocus={() => setButtonIsVisible(true)}
+					onBlur={() => !inputValue && setButtonIsVisible(false)}
 				/>
 				<div className={styles.buttonContainer}>
 					{windowWidth > 900 ? (
