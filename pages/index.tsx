@@ -1,6 +1,6 @@
 // Types
 import type { GetServerSideProps, NextPage } from 'next'
-import type { data } from '../types/dataTypes';
+import type { props } from '../typesAndInterfaces/homePageTypes';
 
 // Components
 import Nav from '../components/nav';
@@ -26,9 +26,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-interface props {
-  results: Array<data>;
-}
+
 
 const Home: NextPage<props> = ({ results }) => {
 
@@ -39,9 +37,9 @@ const Home: NextPage<props> = ({ results }) => {
   return (
     <>
       <Nav />
-      <div>
+      {/* <div>
         { results.map((story, index) => <a key={index} href={story.url} className={styles.link}>{story.title}</a>) }
-      </div>
+      </div> */}
     </>
   )
 }
