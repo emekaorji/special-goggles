@@ -36,7 +36,11 @@ input {
 }
 
 footer {
-  padding-block-start: 10em;
+  color: #00000049;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 800;
+  padding-block: 8em 4em;
 }
 
 

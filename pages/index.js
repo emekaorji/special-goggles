@@ -31,9 +31,9 @@ function Home({ results }) {
 	const loadMoreData = useCallback(async () => {
 		if (isBottomOfPage) {
 			setIsLoading(true);
-			// const newResults = await getData(20, data.length);
+			const newResults = await getData(20, data.length);
 
-			// setData((prev) => prev.concat(newResults));
+			setData((prev) => prev.concat(newResults));
 			setIsBottomOfPage(false);
 			setIsLoading(false);
 		}
@@ -65,7 +65,9 @@ function Home({ results }) {
 			</Head>
 			<Nav data={data} setData={setData} />
 			<Posts results={data} />
-			{isLoading && <Loader width='5em' />}
+			<br />
+			<br />
+			{isLoading && <Loader width='5em' height='.1em' />}
 		</>
 	);
 }
