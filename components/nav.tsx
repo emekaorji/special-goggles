@@ -3,14 +3,19 @@ import styles from '../styles/nav.module.sass';
 import baseStyles from '../styles/app.module.sass';
 
 // Components
-import { Logo } from './icon';
+import { Googles, Logo } from './icon';
 
 // React Hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from './button';
 
 const Nav: React.FC = () => {
-	const [inputIsFocused, setInputIsFocused] = useState(false);
+	const [inputIsFocused, setInputIsFocused] = useState(true);
+	const [windowWidth, setWindowWidth] = useState(0);
+
+	useEffect(() => {
+		setWindowWidth(window.innerWidth);
+	}, []);
 
 	return (
 		<nav
@@ -29,7 +34,13 @@ const Nav: React.FC = () => {
 					onBlur={() => setInputIsFocused(false)}
 				/>
 				<div className={styles.buttonContainer}>
-					<Button>Search</Button>
+					{windowWidth > 900 ? (
+						<Button>Search</Button>
+					) : (
+						<button className={styles.mobileButton}>
+							<Googles width={24} height={24} color='#fff' />
+						</button>
+					)}
 				</div>
 			</div>
 		</nav>
