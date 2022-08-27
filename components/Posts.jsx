@@ -4,6 +4,7 @@ import styles from '../styles/posts.module.sass';
 const Posts = ({ results }) => {
 	return (
 		<div className={baseStyles.container + ' ' + styles.postsContainer}>
+			<div id='scrollPosition'></div>
 			{results.map((story, index) => (
 				<a
 					key={index}

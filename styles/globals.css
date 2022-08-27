@@ -18,6 +18,10 @@ body {
 #app {
   position: relative;
 }
+#scrollPosition {
+  position: relative;
+  top: calc(min(12vh, 120px) * -1);
+}
 
 a {
   color: inherit;

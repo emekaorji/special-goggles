@@ -18,10 +18,10 @@ function ScrollToTop() {
 		window.addEventListener('scroll', handleButtonVisibility);
 
 		return () => window.removeEventListener('scroll', handleButtonVisibility);
-	}, []);
+	}, [handleButtonVisibility]);
 
 	const scrollToFirstPost = () => {
-		const nav = document.querySelector('nav ~ div');
+		const nav = document.getElementById('scrollPosition');
 
 		nav.scrollIntoView();
 	};
