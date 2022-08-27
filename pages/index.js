@@ -5,11 +5,13 @@ import styles from '../styles/app.module.sass';
 import Posts from '../components/Posts';
 
 // React Hooks
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // Functions
 import { getData } from '../utils/dataHandler';
 import Head from 'next/head';
+import Nav from '../components/nav';
+import Loader from '../components/loader';
 
 export const getServerSideProps = async () => {
 	const results = await getData(20);
@@ -21,9 +23,21 @@ export const getServerSideProps = async () => {
 	};
 };
 
-const Home = ({ results }) => {
+function Home({ results }) {
 	const [data, setData] = useState(results);
 	const [isBottomOfPage, setIsBottomOfPage] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+
+	const loadMoreData = useCallback(async () => {
+		if (isBottomOfPage) {
+			setIsLoading(true);
+			// const newResults = await getData(20, data.length);
+
+			// setData((prev) => prev.concat(newResults));
+			setIsBottomOfPage(false);
+			setIsLoading(false);
+		}
+	}, [isBottomOfPage]);
 
 	useEffect(() => {
 		const unsubscribe = () => {
@@ -33,22 +47,12 @@ const Home = ({ results }) => {
 				const isBottomOfPage =
 					window.innerHeight + window.scrollY >= app.scrollHeight - 100;
 
-				console.log(isBottomOfPage);
 				if (isBottomOfPage) setIsBottomOfPage(true);
 			});
 		};
 
 		return unsubscribe();
 	}, [results]);
-
-	const loadMoreData = async () => {
-		if (isBottomOfPage) {
-			const newResults = await getData(20, data.length);
-
-			setData((prev) => prev.concat(newResults));
-			setIsBottomOfPage(false);
-		}
-	};
 
 	useEffect(() => {
 		loadMoreData();
@@ -59,9 +63,11 @@ const Home = ({ results }) => {
 			<Head>
 				<title>Hacker News Posts | Find the latest tech posts</title>
 			</Head>
+			<Nav data={data} setData={setData} />
 			<Posts results={data} />
+			{isLoading && <Loader width='5em' />}
 		</>
 	);
-};
+}
 
 export default Home;

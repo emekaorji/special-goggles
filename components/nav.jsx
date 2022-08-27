@@ -6,16 +6,32 @@ import baseStyles from '../styles/app.module.sass';
 import { Googles, Logo } from './icon';
 
 // React Hooks
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Button from './button';
 
-const Nav = () => {
+// Functions
+import { useData } from '../context/dataContext';
+
+const Nav = ({ data, setData }) => {
+	const initialData = useRef(data).current;
+	const [inputValue, setInputValue] = useState('');
 	const [inputIsFocused, setInputIsFocused] = useState(true);
 	const [windowWidth, setWindowWidth] = useState(0);
+
+	const search = useCallback(() => {
+		const regex = new RegExp(`${inputValue}`, 'gi');
+
+		const newData = initialData.filter((story) => regex.test(story.title));
+		setData(newData);
+	}, []);
 
 	useEffect(() => {
 		setWindowWidth(window.innerWidth);
 	}, []);
+
+	useEffect(() => {
+		search();
+	}, [inputValue]);
 
 	return (
 		<nav
@@ -29,15 +45,17 @@ const Nav = () => {
 				<input
 					type='text'
 					name='posts'
+					value={inputValue}
+					onChange={(e) => setInputValue(e.target.value)}
 					placeholder='Search Post'
 					onFocus={() => setInputIsFocused(true)}
 					onBlur={() => setInputIsFocused(false)}
 				/>
 				<div className={styles.buttonContainer}>
 					{windowWidth > 900 ? (
-						<Button>Search</Button>
+						<Button onClick={search}>Search</Button>
 					) : (
-						<button className={styles.mobileButton}>
+						<button onClick={search} className={styles.mobileButton}>
 							<Googles width={24} height={24} color='#fff' />
 						</button>
 					)}
