@@ -1,0 +1,35 @@
+.container
+  position: fixed
+  bottom: 8vh
+  left: 0
+  right: 0
+  margin-inline: auto
+  display: flex
+  justify-content: flex-end
+
+.button
+  background-color: #ff6600
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: .6em
+  margin-right: 3vw
+  border-radius: .5em
+  box-shadow: 0 0 8px #0001
+  cursor: pointer
+  svg
+    path
+      fill: #ffffff
+
+@media screen and (min-width: 900px)
+  .button
+    background-color: buttonface
+    margin-right: -3vw
+    &:hover
+      background-color: #ff6600
+      svg
+        path
+          fill: #ffffff
+    svg
+      path
+        fill: #000000

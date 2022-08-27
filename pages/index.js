@@ -13,6 +13,7 @@ import Head from 'next/head';
 import Nav from '../components/nav';
 import Loader from '../components/loader';
 import Header from '../components/header';
+import ScrollToTop from '../components/scrollToTop';
 
 export const getServerSideProps = async () => {
 	const results = await getData(20);
@@ -76,6 +77,7 @@ function Home({ results }) {
 			<br />
 			<br />
 			{isLoading && <Loader width='5em' height='.1em' />}
+			<ScrollToTop />
 		</>
 	);
 }
