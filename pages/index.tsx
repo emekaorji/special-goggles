@@ -1,30 +1,20 @@
+// Types
 import type { GetServerSideProps, NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { useCallback, useEffect } from 'react';
-import styles from '../styles/app.module.css';
+import type { data } from '../types/dataTypes';
 
-type data = {
-  url: string,
-  title: string
-}
+// Components
+import Nav from '../components/nav';
 
-const getData = async () => {
-  const dataArray: Array<object> = [];
+// Functions
+import { getData } from '../utils/dataHandler';
 
-  for (let index = 1; index <= 20; index++) {
-    // 124
-    const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${index}.json`);
-    
-    const data: data = await response.json();
+// Styles
+import styles from '../styles/app.module.sass';
 
-    if (data.url) {
-      dataArray.push(data);
-    }
-  }
+// React Hooks
+import { useEffect } from 'react';
 
-  return dataArray;
-}
+
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const results = await getData();
@@ -48,6 +38,7 @@ const Home: NextPage<props> = ({ results }) => {
   
   return (
     <>
+      <Nav />
       <div>
         { results.map((story, index) => <a key={index} href={story.url} className={styles.link}>{story.title}</a>) }
       </div>
