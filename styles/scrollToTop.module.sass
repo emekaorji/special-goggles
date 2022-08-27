@@ -9,6 +9,8 @@
 
 .button
   background-color: #ff6600
+  opacity: 0
+  visibility: hidden
   display: flex
   justify-content: center
   align-items: center
@@ -17,9 +19,15 @@
   border-radius: .5em
   box-shadow: 0 0 8px #0001
   cursor: pointer
+  transition: all 200ms ease, visibility 0ms ease
   svg
     path
       fill: #ffffff
+
+.buttonIsVisible
+  opacity: 1
+  visibility: visible
+  transition: all 200ms ease, visibility 400ms ease
 
 @media screen and (min-width: 900px)
   .button
